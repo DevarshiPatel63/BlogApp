@@ -23,10 +23,11 @@ const UserSchema = new mongoose.Schema({
     minlength: [6, "Password must be at least 6 characters long"],
     select: false,
   },
-  bio: {
+  confirmpassword: {
     type: String,
-    trim: true,
-    maxlength: [500, "Bio cannot exceed 500 characters"],
+    required: [true, "Please provide a password"],
+    minlength: [6, "Password must be at least 6 characters long"],
+    select: false,
   },
   isEmailVerified: {
     type: Boolean,
