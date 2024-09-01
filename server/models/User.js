@@ -1,52 +1,45 @@
-const mongoose = require("mongoose");
-const {Schema} = mongoose;
-const UserSchema = new mongoose.Schema({
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/database');
+
+const User = sequelize.define('user', {
   username: {
-    type: String,
-    required: [true, "Please provide a username"],
+    type: DataTypes.STRING,
+    allowNull: false,
     unique: true,
-    minlength: [2, "Username must be at least 2 characters long"],
+    validate: {
+      len: [2, 255]  
+    }
   },
   email: {
-    type: String,
-    required: [true, "Please provide an email"],
+    type: DataTypes.STRING,
+    allowNull: false,
     unique: true,
-    lowercase: true,
-    match: [
-      /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-      "Please provide a valid email",
-    ],
+    validate: {
+      isEmail: true
+    }
   },
   password: {
-    type: String,
-    required: [true, "Please provide a password"],
-    minlength: [6, "Password must be at least 6 characters long"],
-    select: false,
-  },
-  confirmpassword: {
-    type: String,
-    required: [true, "Please provide a password"],
-    minlength: [6, "Password must be at least 6 characters long"],
-    select: false,
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+    len: [6, 255]  
+    }
   },
   isEmailVerified: {
-    type: Boolean,
-    default: false,
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
   },
-  passwordResetToken: String,
-  passwordResetExpires: Date,
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },  bio: {
-    type: String,
-    trim: true,
-    maxlength: [500, 'Bio cannot exceed 500 characters']
+  passwordResetToken: {
+    type: DataTypes.STRING
+  },
+  passwordResetExpires: {
+    type: DataTypes.DATE
   },
   profilePicture: {
-    type: String,
-    default: 'default.jpg'
+    type: DataTypes.STRING,
   }
+}, {
+  timestamps: true  
 });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = User;
