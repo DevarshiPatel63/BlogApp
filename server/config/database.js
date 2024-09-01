@@ -1,16 +1,17 @@
-const mongoose = require('mongoose');
-const mongoURI = 'mongodb://localhost:27017/?readPreference=primary&directConnection=true&tls=false';
+const { Sequelize } = require('sequelize');
 
-const connectToMongo = async () => {
-    try {
-        await mongoose.connect(mongoURI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-        console.log("Connected to Mongo Successfully");
-    } catch (error) {
-        console.error("Failed to connect to Mongo", error);
-    }
-};
+const sequelize = new Sequelize('Grow_Greeky', 'Devarshi', 'gg@12345', {
+  host: 'localhost',
+  dialect: 'postgres', 
+  logging: true,
+});
 
-module.exports = connectToMongo;
+  try {
+    sequelize.authenticate();
+    console.log('Connected to PostgreSQL successfully');
+  } catch (error) {
+    console.error('Failed to connect to PostgreSQL', error);
+  }
+
+
+module.exports = { sequelize };
