@@ -1,7 +1,7 @@
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import React from "react";
 import signup_img from "../images/signup-removebg-preview.png";
-import SignUpForm from "../auth/SignUp_Form";
+import SignUpForm from "../components/auth/SignUp_Form";
 import logo from '../images/logo.png'
 
 const Signup = () => {

@@ -18,9 +18,6 @@ const SignUpForm = () => {
   } = useForm();
 
   const password = watch("Password", "");
-
-
-
   return (
     <form onSubmit={handleSubmit((data)=> {
       console.log(data)
