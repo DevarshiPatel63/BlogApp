@@ -21,3 +21,4 @@ sequelize.sync({ force: false })
 
 // Available Routes
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/blogs', require('./routes/blogs'));
