@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
-const User = require('./User'); 
-
+ 
 const Blog = sequelize.define('blog', {
   title: {
     type: DataTypes.STRING,
@@ -26,7 +25,7 @@ const Blog = sequelize.define('blog', {
   authorId: {
     type: DataTypes.INTEGER,
     references: {
-      model: User, 
+      model: 'users', 
       key: 'id'
     },
     allowNull: false
