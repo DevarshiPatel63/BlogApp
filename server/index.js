@@ -1,10 +1,14 @@
 const express = require('express');
 const { sequelize } = require('./config/database');
+const createAssociations = require('./config/associations');
 
 const app = express();
 const port = 5000;
 
 app.use(express.json());
+
+// Create associations
+createAssociations();
 
 // Synchronize models with the database
 sequelize.sync({ force: false })
@@ -21,4 +25,4 @@ sequelize.sync({ force: false })
 
 // Available Routes
 app.use('/api/auth', require('./routes/auth'));
-app.use('/api/blogs', require('./routes/blogs'));
+app.use('/api/blogs',require('./routes/blogs'));
